@@ -1,6 +1,6 @@
 {
   "name": "faa-swim-consumer",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "FAA SWIM Queue Consumer for SFDPS and other subscription queues",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -9,10 +9,7 @@
     "dist"
   ],
   "scripts": {
-    "pre-build": "npm-run-all pre-build:*",
-    "pre-build:rm-rf": "rimraf ./dist",
     "build": "npm-run-all build:*",
-    "build:pre": "yarn pre-build",
     "build:compile": "tsup",
     "build:post": "yarn post-build",
     "post-build": "npm-run-all --parallel post-build:*",
@@ -46,8 +43,6 @@
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-promise": "^6.0.0",
     "npm-run-all": "^4.1.5",
-    "rimraf": "^5.0.7",
-    "tsc-alias": "^1.8.10",
     "tsup": "^8.1.0",
     "typescript": "^5.5.2"
   },

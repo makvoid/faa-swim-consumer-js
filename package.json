@@ -1,0 +1,57 @@
+{
+  "name": "faa-swim-consumer",
+  "version": "0.1.1",
+  "description": "FAA SWIM Queue Consumer for SFDPS and other subscription queues",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "pre-build": "npm-run-all pre-build:*",
+    "pre-build:rm-rf": "rimraf ./dist",
+    "build": "npm-run-all build:*",
+    "build:pre": "yarn pre-build",
+    "build:compile": "tsup",
+    "build:post": "yarn post-build",
+    "post-build": "npm-run-all --parallel post-build:*",
+    "post-build:manifest": "cp package.json dist/",
+    "package": "yarn build && yarn publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/makvoid/faa-swim-consumer-js.git"
+  },
+  "keywords": [
+    "faa",
+    "swim",
+    "jms",
+    "queue",
+    "sfdps",
+    "tfms"
+  ],
+  "author": "Michael King <mike@makvoid.dev>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/makvoid/faa-swim-consumer-js/issues"
+  },
+  "homepage": "https://github.com/makvoid/faa-swim-consumer-js#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.50.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.0.1",
+    "eslint-config-standard-with-typescript": "^35.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^5.0.7",
+    "tsc-alias": "^1.8.10",
+    "tsup": "^8.1.0",
+    "typescript": "^5.5.2"
+  },
+  "dependencies": {
+    "solclientjs": "^10.16.0"
+  }
+}

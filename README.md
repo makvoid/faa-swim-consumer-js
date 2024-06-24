@@ -1,4 +1,7 @@
 # faa-swim-consumer-js
+
+[![npm version](https://badge.fury.io/js/faa-swim-consumer.svg)](https://www.npmjs.com/package/faa-swim-consumer)
+
 Solace Consumer library for ingesting messages from the FAA's System Wide Information Management (SWIM) endpoint. Mainly Java resources/examples were released by the FAA, and the very few existing open-source solutions were abandoned. I created this library as a way for JS/TS developers to get started quickly with SWIM, or serve as a start for your own custom implementation.
 
 ## Installation

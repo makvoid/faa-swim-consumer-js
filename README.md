@@ -38,6 +38,7 @@ To use the consumer, you must first initialize the consumer and then connect to 
     * `password` (string, required): Connection password
     * `extraSessionProperties` (object, optional): Additional session properties to pass to the Session constructor
   * `messageConsumerOptions` (object, required): Options for the Message Consumer (queue name, hooks, etc)
+    * `acknowledgeMode` (MessageConsumerAcknowledgeMode, optional): Acknowledge mode to use for incoming messages, automatic or manual/client (default = MessageConsumerAcknowledgeMode.AUTO)
     * `queueName` (string, required): Queue Name (ex. user.example.com.FDPS.824bd0a3-3aec-40eb-b68f-dc406fa2d01a.OUT)
     * `onNewRawMessage` (function, optional): Hook to send raw XML messages to received by the consumer
     * `extraConsumerProperties` (object, optional): Additional message consumer properties to pass to the MessageConsumer constructor
@@ -89,6 +90,9 @@ swim.consumer.on(
   solace.MessageConsumerEventName.MESSAGE,
   (msg) => {
     console.log('New message received:', msg.getXmlContent())
+
+    // Manual acknowledge if using CLIENT acknowledgeMode for the Message Consumer
+    msg.acknowledge()
   }
 )
 
@@ -97,6 +101,9 @@ swim.consumer.on(
 ```
 
 **Note**: If you use the `onNewRawMessage` parameter, the message is automatically converted from `solace.Message` to the raw XML text. If you don't use this hook and instead use your own event listener like above, you'll need to use `msg.getXmlContent()` to convert it if needed.
+
+## Message Acknowledgement
+If `acknowledgeMode` is not passed in the `messageConsumerOptions`, solace automatically uses the 'AUTO' option, which will confirm messages automatically. The other option is 'CLIENT', which will require you to call `msg.acknowledge()` afterwards.
 
 ## Events
 

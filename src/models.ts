@@ -1,4 +1,4 @@
-import solace from 'solclientjs'
+import solace, { MessageConsumerAcknowledgeMode } from 'solclientjs'
 
 export interface SolClientOptions {
   /**
@@ -49,6 +49,16 @@ export interface MessageConsumerOptions {
    * Queue Name (ex. user.example.com.FDPS.824bd0a3-3aec-40eb-b68f-dc406fa2d01a.OUT)
    */
   queueName: string
+
+  /**
+   * Acknowledge mode to use for the MessageConsumer
+   */
+  acknowledgeMode?: MessageConsumerAcknowledgeMode
+
+  /**
+   * Disable auto acknowledge for the MessageConsumer
+   */
+  disableAutoAcknowledge?: boolean
 
   /**
    * Hook to send raw XML messages to that are received by the consumer
@@ -120,4 +130,8 @@ export class SWIMConsumerOptionsFactory implements SWIMConsumerOptions {
     this.sessionOptions = options.sessionOptions
     this.messageConsumerOptions = options.messageConsumerOptions
   }
+}
+
+export {
+  MessageConsumerAcknowledgeMode
 }

@@ -43,6 +43,7 @@ export class SWIMConsumer {
 
     // Setup the MessageConsumer for the active session
     this.consumer = this.session.createMessageConsumer({
+      acknowledgeMode: this.options.messageConsumerOptions.acknowledgeMode,
       queueDescriptor: new solace.QueueDescriptor({
         type: solace.QueueType.QUEUE,
         name: this.options.messageConsumerOptions.queueName,
@@ -55,6 +56,12 @@ export class SWIMConsumer {
     if (this.options.messageConsumerOptions.onNewRawMessage) {
       this.consumer.on(solace.MessageConsumerEventName.MESSAGE, (msg) => {
         this.options.messageConsumerOptions.onNewRawMessage!(msg.getXmlContent())
+
+        // If the acknowledge mode is not auto, acknowledge the message
+        const isAutoAcknowledge = this.options.messageConsumerOptions.acknowledgeMode === solace.MessageConsumerAcknowledgeMode.AUTO
+        if (!this.options.messageConsumerOptions.disableAutoAcknowledge && !isAutoAcknowledge) {
+          msg.acknowledge()
+        }
       })
     }
   }
